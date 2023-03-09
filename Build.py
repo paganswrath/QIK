@@ -1,0 +1,18 @@
+import os
+
+os.system("mkdir Build")
+os.system("mkdir Build/usr")
+os.system("mkdir Build/usr/local")
+os.system("mkdir Build/usr/local/bin/")
+os.system("mkdir Build/DEBIAN")
+os.system("make")
+os.system("cp -r QIK Build/usr/local/bin/")
+os.system("cp -r Config Build/usr/local/bin/")
+os.system("cp -r PackageFiles/control Build/DEBIAN/")
+os.system("mkdir Build/usr/share/")
+os.system("mkdir Build/usr/share/applications/")
+os.system("cp -r PackageFiles/qik.desktop Build/usr/share/applications/")
+os.system("dpkg-deb --root-owner-group --build Build")
+os.system("rm -r Build")
+os.system("rm QIK")
+os.system("mv Build.deb QIK.1.0.deb")

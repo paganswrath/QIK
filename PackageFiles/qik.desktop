@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Qik Editor
+Exec=QIK %u
+Type=Application
+NoDisplay=false
+Categories=System;
+MimeType=x-scheme-handler/apt;

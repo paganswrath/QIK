@@ -1,0 +1,5 @@
+Package: QIK
+Version: 1.0
+Architecture: all
+Maintainer: PPG <pixelphobicgames@gmail.com>
+Description: A Quick Editor For GB (RGBDS) Assembly Development.
