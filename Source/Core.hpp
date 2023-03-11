@@ -7,7 +7,7 @@ class Core{
 
     public:
         Font EditorFont;
-        const char* ConfPath = "/usr/local/bin/Config/";
+        const char* ConfPath = "Config/";
         bool ShowFileDrop = false;
         char AsmPath[100];
 };
@@ -21,7 +21,6 @@ void InitEditor(){
 
 
 void UpdateEditor(){
-    DrawLine(0 , 30 , GetScreenWidth() / 1.5 , 31 , DarkProGray);
     DrawRectangle(0,0,80,30 , DarkProGray);
     if (GetCollision(0,0,80,30 , GetMouseX() , GetMouseY() , 1 , 1)){
         DrawRectangle(0,0,80,30 , MidProGray);
@@ -59,18 +58,23 @@ void UpdateEditor(){
         }
 
     }
-    DrawTextEx(QIKCore.EditorFont , "Undo" , {MeasureTextEx(QIKCore.EditorFont , "Undo" , 14 , 1).x / 2 + 80 / 5 + 80 * 2, 10 } , 14 , 1 , WHITE);
+    DrawTextEx(QIKCore.EditorFont , "Undo" , {MeasureTextEx(QIKCore.EditorFont , "Undo" , 14 , 1).x / 2 + 80 / 6 + 80 * 2, 10 } , 14 , 1 , WHITE);
 
-    DrawTextEx(QIKCore.EditorFont , "QIK Asm Editor" , {GetScreenWidth() / 2 - MeasureTextEx(QIKCore.EditorFont , "QIK Asm Editor" , 14 , 1).x / 2 , 10 } , 14 , 1 , WHITE);
+    DrawRectangleLines(0,0,80,30 , RED);
+    DrawRectangleLines(80,0,80,30 , RED);
+    DrawRectangleLines(160,0,80,30 , RED);
+    DrawTextEx(QIKCore.EditorFont , "QIK Asm Editor" , {GetScreenWidth() / 2 - MeasureTextEx(QIKCore.EditorFont , "QIK Asm Editor" , 18 , 1).x / 2 , 5 } , 18 , 1 , WHITE);
 
     DrawRectangle(30,50,GetScreenWidth(),GetScreenHeight() , MidProGray);
-    DrawRectangleLines(30,50,GetScreenWidth(),GetScreenHeight() , DarkProGray);
+    DrawRectangleLines(30,50,GetScreenWidth() - 31,GetScreenHeight()- 51 , RED);
 
     MainEditor.DisplayEditor(30 , 50 , QIKCore.EditorFont);
+    DrawLine(0 , 29 , GetScreenWidth() , 30 , RED);
 
     if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_S)){
         SaveFile(QIKCore.AsmPath);
     }
+
     if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_Z)){
         InitEditor();
         LoadAsmFile(QIKCore.AsmPath);

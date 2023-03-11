@@ -184,7 +184,7 @@ class Editor{
                 }
 
 
-                DrawTextEx(EFont , FormatText("%i", i), {float(X), (float(Y)+ i * LineSpacing) - Scroll* LineSpacing} , 14 , 1 , TextColor);
+                DrawTextEx(EFont , FormatText("%i", i), {float(X) + 4, (float(Y)+ i * LineSpacing) - Scroll* LineSpacing} , 14 , 1 , TextColor);
 
                 if (i == SelectedLine){
                     DrawRectangle(X + 20, ((Y  + 1)+ i * LineSpacing )- Scroll* LineSpacing, GetScreenWidth() , 10 , GhostProGray);
@@ -194,7 +194,7 @@ class Editor{
 
             }
 
-            DrawTextEx(EFont , FormatText("|"), {float(X) + 22 + (CharacterSelector * MeasureTextEx(EFont , "T" , 14 , 1).x), (float(Y) + SelectedLine * LineSpacing )- Scroll* LineSpacing} , 14 , 1 , WHITE);
+            DrawTextEx(EFont , FormatText("|"), {float(X) + 22 + (CharacterSelector * MeasureTextEx(EFont , "T" , 14 , 1).x), ((float(Y) + SelectedLine * LineSpacing )- Scroll* LineSpacing) - 2} , 14 , 1 , WHITE);
 
             int Key = GetCharPressed();
 
@@ -212,11 +212,10 @@ class Editor{
 
             if (IsKeyPressed(KEY_ENTER)){
                 int i;
-            
+
+                SelectedLine += 2;
                 // increase the size by 1
                 ActiveLines++;
-
-                SelectedLine ++ ;
 
                 // shift elements forward
                 for (i = ActiveLines; i >= SelectedLine; i--)
@@ -224,6 +223,8 @@ class Editor{
             
                 // insert x at pos
                 Lines[SelectedLine - 1] = "";
+
+                SelectedLine --;
 
                 CharacterSelector = 0;
             }
@@ -282,6 +283,16 @@ class Editor{
             if (Scroll > 8000){
                 Scroll = 8000;
             }
+
+            if (SelectedLine < 0){
+                SelectedLine = 0;
+            }
+
+            if (SelectedLine > Scroll + GetScreenHeight() / 16 ){
+                Scroll = SelectedLine;
+            }
+
+
 
 
             

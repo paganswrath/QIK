@@ -13,7 +13,9 @@ int main(int argc, char **argv){
         LoadAsmFile(argv[1]);
         strcpy(QIKCore.AsmPath , argv[1]);
     }
-
+    else {
+        strcpy(QIKCore.AsmPath , "Main.asm");
+    }
 
     while (!WindowShouldClose()){
         BeginDrawing();
